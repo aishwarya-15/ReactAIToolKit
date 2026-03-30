@@ -242,12 +242,6 @@ Adding a new language:
 
 ---
 
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
-
----
-
 <div align="center">
 
 **Built with ❤️ using React 19 + Vite 8 + Groq AI**
