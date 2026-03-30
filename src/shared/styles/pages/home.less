@@ -1,0 +1,219 @@
+/* ============================================================
+   AI TOOLKIT — Home Page
+   Hero, Stats, Tools Grid, Tool Cards, Concepts Overview,
+   History Tab, Recent Activity
+   ============================================================ */
+
+/* ─── Home Layout ─── */
+.home-page { .flex-col(36px); }
+
+.home-hero {
+  text-align: center;
+  padding: @sp-20 0 0;
+}
+
+.home-title {
+  font-size: 28px;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: @sp-10;
+}
+
+.home-subtitle {
+  font-size: @fs-15;
+  color: var(--text-secondary);
+  max-width: 520px;
+  margin: 0 auto @sp-20;
+}
+
+.home-stats {
+  display: flex;
+  justify-content: center;
+  gap: @sp-24;
+}
+
+.home-stat { text-align: center; }
+
+.home-stat-number {
+  font-size: 28px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  color: var(--accent-blue);
+  display: block;
+}
+
+.home-stat-label {
+  .mono-label();
+  color: var(--text-muted);
+}
+
+/* ─── Tools Grid ─── */
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: @sp-14;
+}
+
+.tool-card {
+  .card-base();
+  .interactive();
+  padding: @sp-20;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    border-radius: 3px 3px 0 0;
+  }
+
+  // Color variants
+  &--blue::before   { background: var(--accent-blue); }
+  &--purple::before { background: var(--accent-purple); }
+  &--green::before  { background: var(--accent-green); }
+  &--orange::before { background: var(--accent-orange); }
+  &--red::before    { background: var(--accent-red); }
+
+  &:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-2px);
+    background: var(--bg-elevated);
+  }
+}
+
+.tool-card-icon   { font-size: 24px; margin-bottom: @sp-10; font-family: var(--font-mono); }
+.tool-card-title  { font-size: @fs-15; font-weight: 600; margin-bottom: @sp-6; }
+.tool-card-desc   { font-size: @fs-13; color: var(--text-secondary); margin-bottom: @sp-12; }
+.tool-card-concepts { display: flex; flex-wrap: wrap; gap: @sp-4; }
+
+.concept-tag {
+  .mono-label(@fs-10);
+  .pill(@fs-10, @sp-2, @sp-8);
+  background: var(--bg-elevated);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+/* ─── Section Title ─── */
+.section-title {
+  font-size: @fs-16;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: @sp-16;
+}
+
+/* ─── Concepts Overview ─── */
+.concepts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: @sp-14;
+}
+
+.concept-category {
+  .card-base();
+  padding: @sp-14;
+}
+
+.concept-cat-title {
+  .mono-label(@fs-12);
+  font-weight: 600;
+  color: var(--accent-blue);
+  margin-bottom: @sp-10;
+}
+
+.concept-list {
+  list-style: none;
+  .flex-col(@sp-4);
+}
+
+.concept-item {
+  font-size: @fs-12;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+}
+
+/* ─── History Tab ─── */
+.history-tab { .flex-col(@sp-10); }
+
+.history-item {
+  .card-base();
+  padding: @sp-12 @sp-16;
+}
+
+.history-meta {
+  .flex-between();
+  margin-bottom: @sp-6;
+}
+
+.history-time {
+  font-size: @fs-11;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+.reuse-btn {
+  font-size: @fs-11;
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--accent-blue);
+  padding: @sp-2 @sp-8;
+  border-radius: @sp-4;
+  cursor: pointer;
+}
+
+.history-input {
+  font-size: @fs-13;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+}
+
+.empty-state {
+  color: var(--text-muted);
+  font-size: @fs-14;
+  text-align: center;
+  padding: @sp-32;
+}
+
+/* ─── Recent Activity ─── */
+.recent-section {
+  border-top: 1px solid var(--border);
+  padding-top: @sp-24;
+}
+
+.recent-list { .flex-col(@sp-8); }
+
+.recent-item {
+  .flex-row(@sp-12);
+  .card-base(var(--radius-sm));
+  padding: @sp-10 @sp-14;
+  font-size: @fs-13;
+}
+
+.recent-tool {
+  .mono-label(@fs-11);
+  .pill(@fs-11, @sp-2, @sp-8);
+  background: var(--bg-elevated);
+  color: var(--accent-blue);
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.recent-input {
+  flex: 1;
+  color: var(--text-secondary);
+  .truncate();
+}
+
+.recent-time {
+  font-size: @fs-11;
+  color: var(--text-muted);
+  white-space: nowrap;
+  font-family: var(--font-mono);
+}

@@ -1,0 +1,153 @@
+/* ============================================================
+   AI TOOLKIT — LESS Mixins & Shared Patterns
+   ============================================================ */
+
+// ─── Layout Helpers ───
+.flex-col(@gap: 0) {
+  display: flex;
+  flex-direction: column;
+  gap: @gap;
+}
+
+.flex-center() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-row(@gap: 0) {
+  display: flex;
+  align-items: center;
+  gap: @gap;
+}
+
+.flex-between() {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+// ─── Card / Surface ───
+.card-base(@radius: var(--radius-md)) {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: @radius;
+}
+
+// ─── Interactive Element ───
+.interactive() {
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+// ─── Pill / Badge ───
+.pill(@font-size: @fs-12; @v-pad: 3px; @h-pad: 8px) {
+  border-radius: 20px;
+  padding: @v-pad @h-pad;
+  font-size: @font-size;
+  white-space: nowrap;
+}
+
+// ─── Mono Label (uppercase, tracked) ───
+.mono-label(@size: @fs-11) {
+  font-family: var(--font-mono);
+  font-size: @size;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+// ─── Standard Form Input ───
+.form-control() {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  font-size: @fs-14;
+  padding: @sp-10 @sp-12;
+  outline: none;
+  transition: border-color var(--transition);
+  width: 100%;
+
+  &:focus {
+    border-color: var(--accent-blue);
+  }
+}
+
+// ─── Small Button (icon-btn, ghost-btn, copy-btn, etc.) ───
+.small-btn(@font-size: @fs-12; @padding: 4px 10px) {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  border-radius: var(--radius-sm);
+  padding: @padding;
+  font-size: @font-size;
+  cursor: pointer;
+  transition: all var(--transition);
+
+  &:hover {
+    color: var(--text-primary);
+  }
+}
+
+// ─── Chip / Selectable Pill ───
+.chip(@hover-color: var(--accent-blue); @active-bg: @blue-alpha-bg) {
+  .card-base(20px);
+  .interactive();
+  color: var(--text-secondary);
+  padding: 5px 14px;
+  font-size: 12.5px;
+
+  &:hover {
+    border-color: @hover-color;
+    color: @hover-color;
+  }
+
+  &--active {
+    background: @active-bg;
+    border-color: @hover-color;
+    color: @hover-color;
+  }
+}
+
+// ─── Truncate Text ───
+.truncate() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// ─── Elevated Header Bar ───
+.elevated-header() {
+  .flex-between();
+  padding: @sp-10 @sp-14;
+  background: var(--bg-elevated);
+  border-bottom: 1px solid var(--border);
+}
+
+// ─── Accent Left Border Card ───
+.accent-left-card(@accent: var(--accent-blue)) {
+  .card-base();
+  border-left: 3px solid @accent;
+}
+
+// ─── Square Icon Box ───
+.icon-box(@size: 32px) {
+  .flex-center();
+  width: @size;
+  height: @size;
+  flex-shrink: 0;
+}
+
+// ─── Color Accent State (option-btn correct / wrong) ───
+.state-correct() {
+  background: @green-alpha-bg !important;
+  border-color: var(--accent-green) !important;
+  color: var(--accent-green) !important;
+}
+
+.state-wrong() {
+  background: @red-alpha-bg !important;
+  border-color: var(--accent-red) !important;
+  color: var(--accent-red) !important;
+}

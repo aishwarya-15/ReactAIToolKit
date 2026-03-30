@@ -1,0 +1,137 @@
+/* ============================================================
+   AI TOOLKIT — Sidebar, Nav, Footer, Theme Toggle, Lang Switcher
+   ============================================================ */
+
+/* ─── Sidebar ─── */
+.sidebar {
+  width: var(--sidebar-width);
+  min-width: var(--sidebar-width);
+  background: var(--bg-secondary);
+  border-right: 1px solid var(--border);
+  .flex-col();
+  overflow: hidden;
+}
+
+.sidebar-header {
+  padding: @sp-20 @sp-16 @sp-16;
+  border-bottom: 1px solid var(--border);
+}
+
+.logo {
+  .flex-row(@sp-8);
+  margin-bottom: @sp-10;
+}
+
+.logo-icon  { font-size: 20px; }
+.logo-text  { font-family: var(--font-mono); font-size: @fs-16; font-weight: 700; color: var(--text-primary); }
+.accent     { color: var(--accent-blue); }
+
+.stats { display: flex; gap: @sp-8; }
+
+.stat {
+  font-size: @fs-11;
+  color: var(--text-muted);
+  .pill(@fs-11, 3px, @sp-8);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+}
+
+/* ─── Navigation ─── */
+.nav {
+  flex: 1;
+  padding: @sp-12 @sp-8;
+  .flex-col(@sp-2);
+  overflow-y: auto;
+}
+
+.nav-item {
+  .flex-row(@sp-10);
+  .interactive();
+  padding: 9px @sp-10;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  color: var(--text-secondary);
+  font-size: 13.5px;
+  font-weight: 500;
+
+  &:hover {
+    background: var(--bg-hover);
+    color: var(--text-primary);
+  }
+
+  &.active {
+    background: var(--bg-card);
+    color: var(--accent-blue);
+    border: 1px solid var(--border);
+  }
+}
+
+.nav-icon {
+  font-size: @fs-15;
+  width: 20px;
+  text-align: center;
+  font-family: var(--font-mono);
+}
+
+.nav-label { font-size: @fs-13; }
+
+/* ─── Sidebar Footer ─── */
+.sidebar-footer {
+  padding: @sp-12;
+  border-top: 1px solid var(--border);
+  .flex-col(@sp-8);
+}
+
+.theme-toggle {
+  .small-btn(@fs-12, 7px @sp-12);
+  text-align: left;
+
+  &:hover {
+    border-color: var(--border-hover);
+  }
+}
+
+/* ─── Language Switcher ─── */
+.lang-switcher {
+  .flex-row(@sp-8);
+}
+
+.lang-switcher-label {
+  .mono-label();
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.lang-switcher-btns {
+  display: flex;
+  gap: @sp-4;
+  flex: 1;
+}
+
+.lang-switcher-btn {
+  .small-btn(@fs-11, @sp-4 @sp-10);
+  .interactive();
+  flex: 1;
+  text-align: center;
+
+  &:hover {
+    color: var(--text-primary);
+    border-color: var(--border-hover);
+  }
+
+  &--active {
+    background: @blue-alpha-bg;
+    border-color: var(--accent-blue);
+    color: var(--accent-blue);
+  }
+}
+
+/* ─── API Key Link ─── */
+.api-key-link {
+  font-size: @fs-11;
+  color: var(--accent-green);
+  text-decoration: none;
+  padding: @sp-4 0;
+
+  &:hover { text-decoration: underline; }
+}

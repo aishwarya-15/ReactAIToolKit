@@ -1,0 +1,181 @@
+/* ============================================================
+   AI TOOLKIT — Quiz Page
+   Setup, Active Quiz, Question Cards, Options, Results
+   ============================================================ */
+
+/* ─── Quiz Setup ─── */
+.quiz-setup { .flex-col(@sp-16); }
+
+.topic-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: @sp-6;
+}
+
+.difficulty-buttons { display: flex; gap: @sp-8; }
+
+.difficulty-btn {
+  .small-btn(@fs-13, 7px 18px);
+  .interactive();
+  text-transform: capitalize;
+
+  &:hover { color: var(--text-primary); }
+
+  &--active {
+    background: @blue-alpha-bg;
+    border-color: var(--accent-blue);
+    color: var(--accent-blue);
+  }
+}
+
+/* ─── Generating State ─── */
+.quiz-generating {
+  .flex-col(@sp-16);
+  align-items: center;
+  padding: 48px 0;
+}
+
+.generating-note {
+  font-size: @fs-13;
+  color: var(--text-muted);
+}
+
+/* ─── Active Quiz ─── */
+.quiz-active { .flex-col(@sp-16); }
+
+.quiz-progress-bar {
+  height: @sp-4;
+  background: var(--bg-elevated);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.quiz-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+  transition: width 0.4s ease;
+}
+
+.quiz-meta {
+  .flex-between();
+  font-size: @fs-12;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+.quiz-score-live { color: var(--accent-green); }
+
+/* ─── Question Card ─── */
+.question-card {
+  .card-base();
+  padding: @sp-20;
+  .flex-col(@sp-16);
+}
+
+.question-text {
+  font-size: @fs-16;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+.options-list { .flex-col(@sp-8); }
+
+.option-btn {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: @sp-12 @sp-16;
+  text-align: left;
+  cursor: pointer;
+  .flex-row(@sp-12);
+  font-size: @fs-14;
+  color: var(--text-primary);
+  .interactive();
+
+  &:hover:not(:disabled) {
+    border-color: var(--accent-blue);
+    background: rgba(79, 143, 255, 0.06);
+  }
+
+  &:disabled { cursor: default; }
+
+  &--correct       { .state-correct(); }
+  &--selected-wrong,
+  &--wrong          { .state-wrong(); }
+}
+
+.option-letter {
+  font-family: var(--font-mono);
+  font-size: @fs-12;
+  font-weight: 700;
+  .icon-box(22px);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: @sp-4;
+  flex-shrink: 0;
+}
+
+.option-text  { flex: 1; }
+.option-check { margin-left: auto; font-size: @fs-16; }
+
+/* ─── Explanation ─── */
+.explanation {
+  padding: @sp-12 @sp-16;
+  border-radius: var(--radius-sm);
+  font-size: 13.5px;
+  line-height: 1.6;
+
+  &--correct {
+    background: @green-alpha-bg;
+    border: 1px solid @green-alpha-border;
+    color: var(--text-primary);
+  }
+
+  &--wrong {
+    background: @red-alpha-bg;
+    border: 1px solid @red-alpha-border;
+    color: var(--text-primary);
+  }
+
+  strong { display: block; margin-bottom: @sp-6; }
+}
+
+/* ─── Quiz Results ─── */
+.quiz-results { .flex-col(@sp-24); }
+
+.results-score {
+  .flex-col(@sp-8);
+  align-items: center;
+  padding: @sp-32;
+}
+
+.score-circle { display: flex; align-items: baseline; gap: @sp-4; }
+
+.score-number  { font-size: 56px; font-weight: 700; font-family: var(--font-mono); color: var(--accent-blue); }
+.score-divider { font-size: 32px; color: var(--text-muted); }
+.score-total   { font-size: 32px; font-family: var(--font-mono); color: var(--text-secondary); }
+.score-grade   { font-size: 20px; font-weight: 600; }
+.score-percent { font-size: @fs-14; color: var(--text-muted); }
+
+/* ─── Answer Review ─── */
+.answer-review { .flex-col(@sp-8); }
+
+.review-title {
+  .mono-label(@fs-13);
+  color: var(--text-muted);
+  margin-bottom: @sp-4;
+}
+
+.review-item {
+  .flex-row(@sp-10);
+  .card-base(var(--radius-sm));
+  padding: @sp-8 @sp-12;
+  font-size: @fs-13;
+
+  &--correct .review-icon { color: var(--accent-green); }
+  &--wrong   .review-icon { color: var(--accent-red); }
+}
+
+.review-question { color: var(--text-secondary); flex: 1; }
+
+.results-actions { display: flex; gap: @sp-10; }

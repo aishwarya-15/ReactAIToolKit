@@ -1,0 +1,79 @@
+/* ============================================================
+   AI TOOLKIT — Translator Page
+   Language Grid, Chips, Context Visualization, Translation Result
+   ============================================================ */
+
+/* ─── Language Grid ─── */
+.lang-grid { .flex-col(@sp-14); }
+
+.lang-section { .flex-col(@sp-8); }
+
+.lang-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: @sp-6;
+}
+
+.lang-chip {
+  .chip(var(--accent-teal), @teal-alpha-bg);
+}
+
+/* ─── Context Visualization ─── */
+.context-visualization {
+  .card-base();
+  padding: @sp-14 @sp-16;
+  font-size: @fs-12;
+  font-family: var(--font-mono);
+}
+
+.context-provider-box {
+  background: @purple-alpha-bg;
+  border: 1px solid @purple-alpha-border-strong;
+  border-radius: var(--radius-sm);
+  padding: @sp-8 @sp-12;
+  margin-bottom: @sp-8;
+}
+
+.context-label {
+  color: var(--accent-purple);
+  font-weight: 700;
+  display: block;
+  margin-bottom: @sp-4;
+}
+
+.context-value {
+  color: var(--text-secondary);
+  font-size: @fs-11;
+}
+
+.context-arrows {
+  .flex-col(@sp-2);
+  color: var(--text-muted);
+  font-size: @fs-11;
+  padding-left: @sp-8;
+}
+
+/* ─── Translation Result ─── */
+.translation-result {
+  .accent-left-card(var(--accent-teal));
+  overflow: hidden;
+}
+
+.translation-header {
+  padding: @sp-8 @sp-14;
+  background: var(--bg-elevated);
+  border-bottom: 1px solid var(--border);
+}
+
+.translation-lang {
+  .mono-label(@fs-11);
+  color: var(--accent-teal);
+  letter-spacing: 1px;
+}
+
+.translation-text {
+  padding: @sp-14 @sp-16;
+  font-size: @fs-15;
+  line-height: 1.7;
+  color: var(--text-primary);
+}

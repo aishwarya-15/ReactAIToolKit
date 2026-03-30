@@ -1,0 +1,74 @@
+/* ============================================================
+   AI TOOLKIT — Code Editor Page
+   ============================================================ */
+
+.code-controls {
+  display: flex;
+  align-items: flex-end;
+  gap: @sp-12;
+  flex-wrap: wrap;
+}
+
+.control-group { .flex-col(@sp-6); }
+
+.control-label {
+  .mono-label(@fs-11);
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.font-controls { .flex-row(@sp-8); }
+
+.font-size-display {
+  font-size: @fs-12;
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
+  min-width: 28px;
+  text-align: center;
+}
+
+.code-editor-wrapper {
+  display: flex;
+  .card-base();
+  overflow: hidden;
+  font-family: var(--font-mono);
+}
+
+.line-numbers {
+  background: var(--bg-elevated);
+  border-right: 1px solid var(--border);
+  padding: @sp-12 @sp-8;
+  .flex-col();
+  align-items: flex-end;
+  user-select: none;
+  min-width: 40px;
+}
+
+.line-number {
+  font-size: @fs-12;
+  color: var(--text-muted);
+  line-height: 1.5;
+  padding: 0 @sp-4;
+}
+
+.code-editor {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--text-code);
+  font-family: var(--font-mono);
+  font-size: @fs-13;
+  padding: @sp-12;
+  resize: none;
+  outline: none;
+  line-height: 1.5;
+  tab-size: 2;
+}
+
+.code-stats {
+  display: flex;
+  gap: @sp-16;
+  font-size: @fs-11;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}

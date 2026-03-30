@@ -1,0 +1,65 @@
+/* ============================================================
+   AI TOOLKIT — 404 Page, Scrollbar, RTL Overrides
+   ============================================================ */
+
+/* ─── 404 Not Found ─── */
+.not-found-page {
+  height: calc(100vh - 64px);
+  .flex-center();
+}
+
+.not-found-content {
+  text-align: center;
+  .flex-col(@sp-14);
+  align-items: center;
+}
+
+.not-found-code {
+  font-size: 96px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  color: var(--border);
+}
+
+.not-found-title { font-size: 24px; font-weight: 600; }
+.not-found-desc  { color: var(--text-secondary); font-size: @fs-14; }
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar       { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--bg-elevated);
+  border-radius: 3px;
+
+  &:hover { background: var(--border-hover); }
+}
+
+/* ─── RTL Support ─── */
+[dir="rtl"] {
+  .sidebar {
+    border-right: none;
+    border-left: 1px solid var(--border);
+  }
+
+  .concept-callout {
+    border-left: none;
+    border-right: 3px solid var(--accent-blue);
+  }
+
+  .translation-result {
+    border-left: none;
+    border-right: 3px solid var(--accent-teal);
+  }
+
+  .message--user {
+    flex-direction: row;
+
+    .message-content { align-items: flex-start; }
+    .message-header  { flex-direction: row; }
+  }
+
+  .chat-input-row { direction: rtl; }
+  .clear-chat-btn { margin-left: 0; margin-right: auto; }
+  .option-check   { margin-left: 0; margin-right: auto; }
+  .context-arrows { padding-left: 0; padding-right: @sp-8; }
+}
