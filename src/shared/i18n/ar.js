@@ -14,6 +14,7 @@ const ar = {
   "apiKeyLive": "مفتاح API نشط",
 
   // ── Sidebar ──
+  "menuToggle": "تبديل القائمة",
   "callsStat": "{{count}} استدعاءات",
   "savedStat": "{{count}} محفوظة",
 

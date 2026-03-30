@@ -28,6 +28,7 @@ const en = {
   "apiKeyLive": "API key active",
 
   // ── Sidebar ──
+  "menuToggle": "Toggle menu",
   "callsStat": "{{count}} calls",
   "savedStat": "{{count}} saved",
 

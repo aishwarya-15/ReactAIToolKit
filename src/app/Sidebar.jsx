@@ -7,13 +7,13 @@ import { selectApiCallCount } from '@/shared/store/slices/settingsSlice'
 import { selectHistoryCount } from '@/shared/store/slices/historySlice'
 import { useLocale } from '@/shared/hooks'
 
-export default function Sidebar() {
+export default function Sidebar({ open }) {
   const { t } = useLocale()
   const apiCallCount = useSelector(selectApiCallCount)
   const historyCount = useSelector(selectHistoryCount)
 
   return (
-    <aside className="sidebar">
+    <aside className={`sidebar${open ? ' sidebar--open' : ''}`}>
       <div className="sidebar-header">
         <div className="logo">
           <span className="logo-icon">⚡</span>

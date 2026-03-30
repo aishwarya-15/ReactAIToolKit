@@ -1,0 +1,461 @@
+/* ============================================================
+   AI TOOLKIT — Responsive / Mobile Styles
+   Breakpoints: 1024px (tablet), 768px (large phone), 480px (small)
+   ============================================================ */
+
+/* ─── Hamburger / Mobile Menu Button ─── */
+.hamburger-btn {
+  display: none;              /* hidden on desktop */
+  position: fixed;
+  top: @sp-12;
+  left: @sp-12;
+  z-index: 1100;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-size: 22px;
+  width: 40px;
+  height: 40px;
+  .flex-center();
+  .interactive();
+
+  &:hover {
+    border-color: var(--accent-blue);
+    color: var(--accent-blue);
+  }
+}
+
+/* RTL hamburger position */
+[dir="rtl"] .hamburger-btn {
+  left: auto;
+  right: @sp-12;
+}
+
+/* ─── Mobile Overlay (backdrop behind sidebar) ─── */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+/* ====================================================
+   ≤ 1024 px  — Tablet  (sidebar → slide-out drawer)
+   ==================================================== */
+@media (max-width: @bp-lg) {
+
+  /* Show hamburger */
+  .hamburger-btn {
+    display: flex;
+  }
+
+  /* Sidebar becomes a slide-out drawer */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 1000;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    box-shadow: none;
+  }
+
+  [dir="rtl"] .sidebar {
+    left: auto;
+    right: 0;
+    transform: translateX(100%);
+  }
+
+  /* When open */
+  .sidebar--open {
+    transform: translateX(0);
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.3);
+  }
+
+  [dir="rtl"] .sidebar--open {
+    transform: translateX(0);
+    box-shadow: -4px 0 24px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Show overlay when sidebar is open */
+  .sidebar-overlay--visible {
+    display: block;
+  }
+
+  /* Main content takes full width */
+  .main-content {
+    width: 100%;
+  }
+
+  /* Page wrapper — add top padding for hamburger */
+  .page-wrapper {
+    padding-top: 60px;
+  }
+}
+
+/* ====================================================
+   ≤ 768 px  — Large Phone / Small Tablet
+   ==================================================== */
+@media (max-width: @bp-md) {
+
+  /* ─── Page Wrapper ─── */
+  .page-wrapper {
+    padding: 60px @sp-16 @sp-16;
+    max-width: 100%;
+  }
+
+  /* ─── Tool Header: stack vertically ─── */
+  .tool-header {
+    flex-direction: column;
+    gap: @sp-12;
+  }
+
+  .tool-header-left {
+    gap: @sp-10;
+  }
+
+  .tool-icon {
+    width: 42px;
+    height: 42px;
+    font-size: 16px;
+  }
+
+  .tool-title {
+    font-size: 18px;
+  }
+
+  /* ─── Action Rows: stack on mobile ─── */
+  .action-row {
+    flex-direction: column;
+    gap: @sp-8;
+
+    .run-btn,
+    .secondary-btn {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  /* ─── Home Page ─── */
+  .home-title {
+    font-size: 22px;
+  }
+
+  .home-subtitle {
+    font-size: @fs-13;
+  }
+
+  .home-stats {
+    gap: @sp-14;
+  }
+
+  .home-stat-number {
+    font-size: 22px;
+  }
+
+  .tools-grid {
+    grid-template-columns: 1fr;
+    gap: @sp-10;
+  }
+
+  .concepts-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .recent-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: @sp-6;
+  }
+
+  .recent-input {
+    width: 100%;
+  }
+
+  /* ─── Code Page ─── */
+  .code-controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: @sp-10;
+  }
+
+  .code-editor-wrapper {
+    flex-direction: column;
+  }
+
+  .line-numbers {
+    flex-direction: row;
+    overflow-x: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    min-width: unset;
+    padding: @sp-6 @sp-8;
+    gap: @sp-8;
+  }
+
+  .code-stats {
+    flex-wrap: wrap;
+    gap: @sp-8;
+  }
+
+  /* ─── Chat Page ─── */
+  .chat-page {
+    height: calc(100vh - 60px);      /* account for hamburger bar */
+  }
+
+  .messages-list {
+    min-height: 200px;
+    max-height: none;
+    flex: 1;
+    padding: @sp-10;
+  }
+
+  .message-content {
+    max-width: 88%;
+  }
+
+  .message-text {
+    font-size: @fs-13;
+    padding: @sp-8 @sp-10;
+  }
+
+  .message-avatar {
+    width: 28px;
+    height: 28px;
+    font-size: @fs-12;
+  }
+
+  .zustand-info {
+    flex-direction: column;
+    gap: @sp-6;
+  }
+
+  .clear-chat-btn {
+    margin-left: 0;
+    align-self: flex-end;
+  }
+
+  .chat-suggestions {
+    gap: @sp-6;
+  }
+
+  .suggestion-chip {
+    font-size: @fs-12;
+    padding: @sp-4 @sp-10;
+  }
+
+  /* ─── Translator ─── */
+  .lang-chips {
+    gap: @sp-4;
+  }
+
+  .lang-chip {
+    font-size: @fs-11;
+    padding: @sp-4 @sp-10;
+  }
+
+  /* ─── Quiz ─── */
+  .quiz-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: @sp-4;
+  }
+
+  .difficulty-buttons {
+    flex-wrap: wrap;
+  }
+
+  .results-actions {
+    flex-direction: column;
+    gap: @sp-8;
+
+    .run-btn,
+    .secondary-btn {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  .score-number {
+    font-size: 40px;
+  }
+
+  .score-divider,
+  .score-total {
+    font-size: 24px;
+  }
+
+  /* ─── Output Box ─── */
+  .output-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: @sp-6;
+    padding: @sp-8 @sp-12;
+  }
+
+  .output-content {
+    padding: @sp-12;
+    font-size: @fs-13;
+  }
+
+  /* ─── Toast: bottom-center on mobile ─── */
+  .toast-container {
+    left: @sp-12;
+    right: @sp-12;
+    bottom: @sp-12;
+    max-width: 100%;
+  }
+
+  /* ─── Tabs: horizontal scroll ─── */
+  .tab-bar {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .tab {
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* ─── 404 Page ─── */
+  .not-found-code {
+    font-size: 64px;
+  }
+
+  .not-found-title {
+    font-size: 18px;
+  }
+}
+
+/* ====================================================
+   ≤ 480 px  — Small Phone
+   ==================================================== */
+@media (max-width: @bp-sm) {
+
+  /* ─── Sidebar: full width drawer ─── */
+  .sidebar {
+    width: 100vw;
+    min-width: 100vw;
+  }
+
+  /* ─── Page wrapper: tighter padding ─── */
+  .page-wrapper {
+    padding: 56px @sp-10 @sp-10;
+  }
+
+  /* ─── Home ─── */
+  .home-hero {
+    padding: @sp-10 0 0;
+  }
+
+  .home-title {
+    font-size: 20px;
+  }
+
+  .home-stats {
+    flex-direction: column;
+    gap: @sp-10;
+  }
+
+  .tool-card {
+    padding: @sp-14;
+  }
+
+  /* ─── Tool Header even tighter ─── */
+  .tool-title {
+    font-size: 16px;
+  }
+
+  .tool-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+  }
+
+  .badge {
+    font-size: 9px;
+  }
+
+  /* ─── Chat ─── */
+  .chat-input-row {
+    gap: @sp-6;
+  }
+
+  .mic-btn,
+  .send-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+
+  .chat-input {
+    font-size: @fs-13;
+    padding: @sp-6 @sp-10;
+  }
+
+  .message {
+    gap: @sp-6;
+  }
+
+  .message-content {
+    max-width: 92%;
+  }
+
+  /* ─── Form controls: bigger touch targets ─── */
+  .text-input,
+  .textarea,
+  .select,
+  .sd-trigger {
+    font-size: 16px;          /* prevents iOS zoom on focus */
+    padding: @sp-12;
+  }
+
+  .run-btn {
+    padding: @sp-12 @sp-20;
+    font-size: @fs-14;
+  }
+
+  /* ─── Quiz options: bigger targets ─── */
+  .option-btn {
+    padding: @sp-14 @sp-12;
+  }
+
+  /* ─── Sample texts: scroll instead of wrap ─── */
+  .sample-texts {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: @sp-4;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .sample-btn {
+    flex-shrink: 0;
+  }
+
+  /* ─── Concept callout: tighter ─── */
+  .concept-callout {
+    padding: @sp-10 @sp-12;
+    font-size: @fs-12;
+  }
+
+  /* ─── Review items stack ─── */
+  .review-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: @sp-4;
+  }
+}
