@@ -3,7 +3,7 @@ import AppRoutes from './routes'
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/ReactAIToolKit">
       <AppRoutes />
     </BrowserRouter>
   )
