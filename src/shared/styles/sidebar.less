@@ -135,3 +135,69 @@
 
   &:hover { text-decoration: underline; }
 }
+
+/* ─── API Key Input ─── */
+.api-key-input {
+  .flex-col(@sp-4);
+}
+
+.api-key-row {
+  display: flex;
+  gap: @sp-4;
+}
+
+.api-key-field {
+  flex: 1;
+  min-width: 0;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: @fs-11;
+  padding: @sp-6 @sp-8;
+  outline: none;
+  transition: border-color var(--transition);
+
+  &::placeholder { color: var(--text-muted); }
+  &:focus { border-color: var(--accent-blue); }
+}
+
+.api-key-save,
+.api-key-clear {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-size: @fs-12;
+  width: 28px;
+  .flex-center();
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all var(--transition);
+}
+
+.api-key-save {
+  color: var(--accent-green);
+  border-color: var(--accent-green);
+
+  &:hover { background: @green-alpha-bg; }
+}
+
+.api-key-clear:hover {
+  color: var(--accent-red);
+  border-color: var(--accent-red);
+}
+
+.api-key-status {
+  font-size: @fs-10;
+  font-family: var(--font-mono);
+}
+
+.api-key-demo {
+  color: var(--accent-orange);
+}
+
+.api-key-live {
+  color: var(--accent-green);
+}

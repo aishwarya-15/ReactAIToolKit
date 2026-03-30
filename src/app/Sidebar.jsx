@@ -1,6 +1,7 @@
 import NavBar from './NavBar'
 import ThemeToggle from './ThemeToggle'
 import LanguageSwitcher from './LanguageSwitcher'
+import ApiKeyInput from './ApiKeyInput'
 import { useSelector } from 'react-redux'
 import { selectApiCallCount } from '@/shared/store/slices/settingsSlice'
 import { selectHistoryCount } from '@/shared/store/slices/historySlice'
@@ -30,6 +31,7 @@ export default function Sidebar() {
       <NavBar />
 
       <div className="sidebar-footer">
+        <ApiKeyInput />
         <LanguageSwitcher />
         <ThemeToggle />
         <a

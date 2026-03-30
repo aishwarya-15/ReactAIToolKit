@@ -1,6 +1,6 @@
 // Groq Orpheus TTS — text-to-speech API
 
-import { GROQ_TTS_URL, API_KEY, isDemoMode } from './config'
+import { GROQ_TTS_URL, getApiKey, isDemoMode } from './config'
 import { detectLang } from './detectLang'
 
 const TTS_CHAR_LIMIT = 200
@@ -41,7 +41,7 @@ async function ttsChunk(text, voice, model) {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${API_KEY}`,
+      Authorization: `Bearer ${getApiKey()}`,
     },
     body: JSON.stringify({ model, input: text, voice, response_format: 'wav' }),
   })

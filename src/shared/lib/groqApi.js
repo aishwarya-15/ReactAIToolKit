@@ -1,6 +1,6 @@
 // Groq LLM API — text generation & chat
 
-import { GROQ_API_URL, API_KEY, isDemoMode, sleep } from './config'
+import { GROQ_API_URL, getApiKey, isDemoMode, sleep } from './config'
 import { t } from '@/shared/i18n'
 
 // ── Single-turn completion ──
@@ -14,7 +14,7 @@ export async function callGroqAPI({ systemPrompt, userMessage, model = 'llama-3.
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${API_KEY}`,
+      Authorization: `Bearer ${getApiKey()}`,
     },
     body: JSON.stringify({
       model,
@@ -47,7 +47,7 @@ export async function callGroqChat({ messages, model = 'llama-3.1-8b-instant' })
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${API_KEY}`,
+      Authorization: `Bearer ${getApiKey()}`,
     },
     body: JSON.stringify({
       model,
@@ -86,7 +86,7 @@ export async function callGroqChatStream({ messages, model = 'llama-3.1-8b-insta
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${API_KEY}`,
+      Authorization: `Bearer ${getApiKey()}`,
     },
     signal,
     body: JSON.stringify({

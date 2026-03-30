@@ -19,6 +19,14 @@ const en = {
   "logoAccent": "Toolkit",
   "getApiKeyLink": "Get Free API Key →",
 
+  // ── API Key Input ──
+  "apiKeyPlaceholder": "Paste Groq API key…",
+  "apiKeySaved": "API key saved!",
+  "apiKeyCleared": "API key removed — demo mode",
+  "apiKeyClear": "Remove API key",
+  "apiKeyDemo": "Demo mode",
+  "apiKeyLive": "API key active",
+
   // ── Sidebar ──
   "callsStat": "{{count}} calls",
   "savedStat": "{{count}} saved",

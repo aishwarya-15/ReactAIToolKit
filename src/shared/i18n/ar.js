@@ -5,6 +5,14 @@ const ar = {
   "logoAccent": "أدوات",
   "getApiKeyLink": "احصل على مفتاح API مجاني ←",
 
+  // ── API Key Input ──
+  "apiKeyPlaceholder": "الصق مفتاح Groq API…",
+  "apiKeySaved": "تم حفظ مفتاح API!",
+  "apiKeyCleared": "تمت إزالة المفتاح — وضع تجريبي",
+  "apiKeyClear": "إزالة مفتاح API",
+  "apiKeyDemo": "وضع تجريبي",
+  "apiKeyLive": "مفتاح API نشط",
+
   // ── Sidebar ──
   "callsStat": "{{count}} استدعاءات",
   "savedStat": "{{count}} محفوظة",
