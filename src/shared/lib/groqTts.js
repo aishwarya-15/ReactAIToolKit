@@ -1,7 +1,10 @@
 // Groq Orpheus TTS — text-to-speech API
+// Includes retry with exponential backoff + client-side rate limiting
 
 import { GROQ_TTS_URL, getApiKey, isDemoMode } from './config'
 import { detectLang } from './detectLang'
+import { withRetry } from './retry'
+import { withRateLimit, ttsLimiter } from './rateLimiter'
 
 const TTS_CHAR_LIMIT = 200
 
@@ -48,12 +51,21 @@ async function ttsChunk(text, voice, model) {
 
   if (!response.ok) {
     let msg = `TTS API Error: ${response.status}`
+    let retryAfter = null
+    const ra = response.headers.get('Retry-After')
+    if (ra) retryAfter = parseFloat(ra)
     try { const err = await response.json(); msg = err.error?.message || msg } catch {}
-    throw new Error(msg)
+    const error = new Error(msg)
+    error.status = response.status
+    if (retryAfter) error.retryAfter = retryAfter
+    throw error
   }
 
   return response.arrayBuffer()
 }
+
+// Wrap individual chunk fetching with retry (each chunk is idempotent)
+const resilientTtsChunk = withRetry(ttsChunk, { maxRetries: 2 })
 
 function stitchWavBuffers(buffers) {
   if (buffers.length === 1) return new Blob([buffers[0]], { type: 'audio/wav' })
@@ -75,7 +87,8 @@ function stitchWavBuffers(buffers) {
   return new Blob([out], { type: 'audio/wav' })
 }
 
-export async function callGroqTTS(text, { lang, signal } = {}) {
+// Raw TTS function — rate-limited below
+async function _callGroqTTS(text, { lang, signal } = {}) {
   const detected = lang || detectLang(text)
 
   if (isDemoMode()) return { url: null, lang: detected }
@@ -87,12 +100,15 @@ export async function callGroqTTS(text, { lang, signal } = {}) {
   const buffers = await Promise.all(
     chunks.map(chunk => {
       if (signal?.aborted) throw new DOMException('Aborted', 'AbortError')
-      return ttsChunk(chunk, route.voice, route.model)
+      return resilientTtsChunk(chunk, route.voice, route.model)
     })
   )
 
   const blob = stitchWavBuffers(buffers)
   return { url: URL.createObjectURL(blob), lang: detected }
 }
+
+// ── Public API — wrapped with rate limit ──
+export const callGroqTTS = withRateLimit(_callGroqTTS, ttsLimiter)
 
 export { detectLang }

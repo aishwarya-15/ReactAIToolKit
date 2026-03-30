@@ -1,10 +1,33 @@
 // Groq LLM API — text generation & chat
+// Includes retry with exponential backoff + client-side rate limiting
 
 import { GROQ_API_URL, getApiKey, isDemoMode, sleep } from './config'
+import { withRetry } from './retry'
+import { withRateLimit, apiLimiter } from './rateLimiter'
 import { t } from '@/shared/i18n'
 
-// ── Single-turn completion ──
-export async function callGroqAPI({ systemPrompt, userMessage, model = 'llama-3.1-8b-instant', maxTokens = 1024 }) {
+// ── Resilient error factory — preserves Retry-After ──
+async function throwApiError(response) {
+  let msg = `API Error: ${response.status}`
+  let retryAfter = null
+
+  // Parse Retry-After header (Groq sends this on 429)
+  const ra = response.headers.get('Retry-After')
+  if (ra) retryAfter = parseFloat(ra)
+
+  try {
+    const body = await response.json()
+    msg = body.error?.message || msg
+  } catch { /* response may not be JSON */ }
+
+  const err = new Error(msg)
+  err.status = response.status
+  if (retryAfter) err.retryAfter = retryAfter
+  throw err
+}
+
+// ── Single-turn completion (raw — wrapped below) ──
+async function _callGroqAPI({ systemPrompt, userMessage, model = 'llama-3.1-8b-instant', maxTokens = 1024 }) {
   if (isDemoMode()) {
     await sleep(1200)
     return getDemoResponse(systemPrompt, userMessage)
@@ -27,17 +50,14 @@ export async function callGroqAPI({ systemPrompt, userMessage, model = 'llama-3.
     }),
   })
 
-  if (!response.ok) {
-    const error = await response.json()
-    throw new Error(error.error?.message || `API Error: ${response.status}`)
-  }
+  if (!response.ok) await throwApiError(response)
 
   const data = await response.json()
   return data.choices[0].message.content
 }
 
-// ── Multi-turn chat (non-streaming) ──
-export async function callGroqChat({ messages, model = 'llama-3.1-8b-instant' }) {
+// ── Multi-turn chat — non-streaming (raw — wrapped below) ──
+async function _callGroqChat({ messages, model = 'llama-3.1-8b-instant' }) {
   if (isDemoMode()) {
     await sleep(1000)
     return getDemoChatResponse(messages)
@@ -60,17 +80,16 @@ export async function callGroqChat({ messages, model = 'llama-3.1-8b-instant' })
     }),
   })
 
-  if (!response.ok) {
-    const error = await response.json()
-    throw new Error(error.error?.message || `API Error: ${response.status}`)
-  }
+  if (!response.ok) await throwApiError(response)
 
   const data = await response.json()
   return data.choices[0].message.content
 }
 
-// ── SSE streaming chat ──
-export async function callGroqChatStream({ messages, model = 'llama-3.1-8b-instant', onChunk, signal }) {
+// ── SSE streaming chat (raw — wrapped below) ──
+// NOTE: Streaming is NOT retried because partial output is already sent to UI.
+// Rate limiting is still applied.
+async function _callGroqChatStream({ messages, model = 'llama-3.1-8b-instant', onChunk, signal }) {
   if (isDemoMode()) {
     const full = getDemoChatResponse(messages)
     const words = full.split(' ')
@@ -101,10 +120,7 @@ export async function callGroqChatStream({ messages, model = 'llama-3.1-8b-insta
     }),
   })
 
-  if (!response.ok) {
-    const error = await response.json()
-    throw new Error(error.error?.message || `API Error: ${response.status}`)
-  }
+  if (!response.ok) await throwApiError(response)
 
   const frame = () => new Promise(resolve => requestAnimationFrame(resolve))
   const tick = (ms) => new Promise(resolve => setTimeout(resolve, ms))
@@ -176,3 +192,22 @@ function getDemoChatResponse(messages) {
   const index = messages.length % responses.length
   return `${responses[index]}${t("apiDemoChatSuffix")}`
 }
+
+// ── Public API — wrapped with retry + rate-limit ──
+// Single-turn & multi-turn get retry (idempotent reads).
+// Streaming gets rate-limit only (can't retry partial output).
+
+export const callGroqAPI = withRateLimit(
+  withRetry(_callGroqAPI, { maxRetries: 3 }),
+  apiLimiter
+)
+
+export const callGroqChat = withRateLimit(
+  withRetry(_callGroqChat, { maxRetries: 3 }),
+  apiLimiter
+)
+
+export const callGroqChatStream = withRateLimit(
+  _callGroqChatStream,    // no retry — streaming is not idempotent
+  apiLimiter
+)

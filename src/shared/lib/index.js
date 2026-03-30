@@ -2,3 +2,5 @@
 export { callGroqAPI, callGroqChat, callGroqChatStream } from './groqApi'
 export { callGroqTTS, detectLang } from './groqTts'
 export { getApiKey, setApiKey, clearApiKey, isDemoMode, sleep } from './config'
+export { withRetry } from './retry'
+export { withRateLimit, apiLimiter, ttsLimiter } from './rateLimiter'
