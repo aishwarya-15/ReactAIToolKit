@@ -1,6 +1,6 @@
 <div align="center">
 
-# ⚡ AI Toolkit — React Learning Platform
+# ⚡ AI Toolkit — React Learning Application
 
 A production-grade, AI-powered learning platform with 5 interactive tools — built with modern React patterns, real-time streaming, and full mobile responsiveness.
 
