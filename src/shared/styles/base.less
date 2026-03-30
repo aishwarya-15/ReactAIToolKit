@@ -76,12 +76,14 @@ body {
 .app {
   display: flex;
   height: 100vh;
+  height: 100dvh;            /* dynamic viewport for mobile browsers */
   overflow: hidden;
   background: var(--bg-primary);
 }
 
 .main-content {
   flex: 1;
+  min-width: 0;              /* prevent flex child overflow */
   overflow-y: auto;
   background: var(--bg-primary);
 }
