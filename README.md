@@ -12,13 +12,10 @@ A production-grade, AI-powered learning platform with 5 interactive tools — bu
 [![Deploy](https://img.shields.io/badge/CI/CD-GitHub_Actions-2088FF?style=flat-square&logo=githubactions&logoColor=white)](https://github.com/aishwarya-15/ReactAIToolKit/actions)
 
 </div>
----
 
 ## 🚀 Live Demo
 
 👉 **[https://aishwarya-15.github.io/ReactAIToolKit/](https://aishwarya-15.github.io/ReactAIToolKit/)**
-
----
 
 ## ✨ Features
 
