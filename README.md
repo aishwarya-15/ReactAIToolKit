@@ -13,17 +13,6 @@ A production-grade, AI-powered learning platform with 5 interactive tools — bu
 [![Deploy](https://img.shields.io/badge/CI/CD-GitHub_Actions-2088FF?style=flat-square&logo=githubactions&logoColor=white)](https://github.com/aishwarya-15/ReactAIToolKit/actions)
 
 </div>
-
----
-
-## 📸 Screenshots
-
-| Dark Mode | Light Mode |
-|-----------|------------|
-| ![Dark](https://via.placeholder.com/400x250/0d0d0f/4f8fff?text=Dark+Theme) | ![Light](https://via.placeholder.com/400x250/f5f5f8/4f8fff?text=Light+Theme) |
-
-> 💡 **Replace** the placeholder images above with actual screenshots of your app.
-
 ---
 
 ## 🚀 Live Demo
