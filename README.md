@@ -8,7 +8,6 @@ A production-grade, AI-powered learning platform with 5 interactive tools — bu
 [![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=white)](https://react.dev)
 [![Vite](https://img.shields.io/badge/Vite-8-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vite.dev)
 [![Redux Toolkit](https://img.shields.io/badge/Redux_Toolkit-2-764ABC?style=flat-square&logo=redux&logoColor=white)](https://redux-toolkit.js.org)
-[![Zustand](https://img.shields.io/badge/Zustand-5-orange?style=flat-square)](https://zustand-demo.pmnd.rs)
 [![LESS](https://img.shields.io/badge/LESS-4-1D365D?style=flat-square&logo=less&logoColor=white)](https://lesscss.org)
 [![Deploy](https://img.shields.io/badge/CI/CD-GitHub_Actions-2088FF?style=flat-square&logo=githubactions&logoColor=white)](https://github.com/aishwarya-15/ReactAIToolKit/actions)
 
