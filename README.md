@@ -114,7 +114,6 @@ src/
 | **Build Tool** | Vite 8 |
 | **Routing** | React Router DOM 7 |
 | **Global State** | Redux Toolkit 2 |
-| **Local State** | Zustand 5 (chat persistence) |
 | **HTTP Client** | Axios |
 | **AI Backend** | Groq API (Llama 3.1 8B Instant) |
 | **TTS** | Groq Orpheus Models |
